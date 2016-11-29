@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.HibernateException;
+
 import edu.uclm.esi.iso2.multas.dao.DriverDao;
 import edu.uclm.esi.iso2.multas.dao.GeneralDao;
 import edu.uclm.esi.iso2.multas.dao.OwnerDao;
@@ -40,7 +42,7 @@ public class Inquiry {
 		
 	}
 	
-	public Inquiry(String license, double speed, String location, double maxSpeed) {
+	public Inquiry(String license, double speed, String location, double maxSpeed) throws HibernateException {
 		this();
 		this.dateOfIssue=new Date(System.currentTimeMillis());
 		this.speed=speed;
@@ -49,12 +51,12 @@ public class Inquiry {
 		this.owner=findOwner(license);
 	}
 
-	private Owner findOwner(String license) {
+	private Owner findOwner(String license) throws HibernateException {
 		OwnerDao dao=new OwnerDao();
 		return dao.findByLicense(license);
 	}
 
-	public Sanction createSanctionFor(String dni) {
+	public Sanction createSanctionFor(String dni) throws HibernateException {
 		int points=calculatePoints();
 		int amount=calculateAmount();
 		Sanction sanction=new Sanction();

@@ -21,4 +21,6 @@
   	<artifactId>DGT_project</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
   </parent>
+  <version>1.0</version>
+  <groupId>ISODEVELOPERSSL</groupId>
 </project>
