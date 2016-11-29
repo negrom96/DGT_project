@@ -9,7 +9,6 @@
   </parent>
   <groupId>ISODEVELOPERSL</groupId>
   <artifactId>radar</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>radar</name>
   <url>http://maven.apache.org</url>
   <properties>
