@@ -2,9 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ISODEVELOPERSL</groupId>
   <artifactId>interfaz</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>interfaz</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -18,4 +16,9 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <parent>
+  	<groupId>ISODEVELOPERSL</groupId>
+  	<artifactId>DGT_project</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
 </project>

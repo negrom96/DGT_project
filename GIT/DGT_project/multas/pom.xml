@@ -70,4 +70,9 @@
 	<finalName>MultasConMaven</finalName>
   </build>
   <groupId>ISODEVELOPERSSL</groupId>
+  <parent>
+  	<groupId>ISODEVELOPERSL</groupId>
+  	<artifactId>DGT_project</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
 </project>

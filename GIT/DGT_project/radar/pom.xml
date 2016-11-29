@@ -2,7 +2,6 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ISODEVELOPERSL</groupId>
   <artifactId>radar</artifactId>
   <name>radar</name>
   <url>http://maven.apache.org</url>
@@ -18,4 +17,9 @@
     </dependency>
   </dependencies>
   <version>0.0.1</version>
+  <parent>
+  	<groupId>ISODEVELOPERSL</groupId>
+  	<artifactId>DGT_project</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
 </project>
