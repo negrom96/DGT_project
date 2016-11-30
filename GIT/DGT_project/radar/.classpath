@@ -23,5 +23,15 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/multas"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/.m2/repository/org/hibernate/hibernate-core/5.2.2.Final/hibernate-core-5.2.2.Final.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.hibernate"/>
+			<attribute name="maven.artifactId" value="hibernate-core"/>
+			<attribute name="maven.version" value="5.2.2.Final"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/pablo/Dropbox/UNIVERSIDAD/Tercero/1er cuatrimestre/INGENIERÍA DE SOFTWARE II/ISO II/javax.persistence_1.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

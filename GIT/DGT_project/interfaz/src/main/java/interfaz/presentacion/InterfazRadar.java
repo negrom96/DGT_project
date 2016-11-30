@@ -16,15 +16,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
 
+import org.hibernate.HibernateException;
+
 public class InterfazRadar {
 
 	private JFrame frame;
 	private JButton btnNewButton;
 	private JTextField textField;
-	private JLabel lblLmiteDeVelocidad;
 	private JLabel lblKmh;
 	private Radar radar;
 	private JPanel panel;
+	private JLabel lblIntroduzcaElLmite;
 
 	/**
 	 * Launch the application.
@@ -66,35 +68,35 @@ public class InterfazRadar {
 			panel.setLayout(null);
 			{
 				btnNewButton = new JButton("Iniciar Radar");
-				btnNewButton.setBounds(148, 160, 123, 29);
+				btnNewButton.setBounds(143, 167, 123, 29);
 				panel.add(btnNewButton);
 				btnNewButton.setEnabled(false);
 				{
 					lblKmh = new JLabel("Km/h");
-					lblKmh.setBounds(330, 108, 38, 20);
+					lblKmh.setBounds(281, 108, 38, 20);
 					panel.add(lblKmh);
 				}
 				{
-					lblLmiteDeVelocidad = new JLabel("Límite de velocidad");
-					lblLmiteDeVelocidad.setBounds(27, 108, 136, 20);
-					panel.add(lblLmiteDeVelocidad);
-				}
-				{
 					textField = new JTextField();
-					textField.setBounds(174, 105, 146, 26);
+					textField.setBounds(120, 105, 146, 26);
 					panel.add(textField);
 					textField.addActionListener(new TextFieldActionListener());
 					textField.setColumns(10);
+				}
+				{
+					lblIntroduzcaElLmite = new JLabel("Introduzca el límite de velocidad de la vía:");
+					lblIntroduzcaElLmite.setBounds(15, 52, 319, 20);
+					panel.add(lblIntroduzcaElLmite);
 				}
 				btnNewButton.addActionListener(new BtnNewButtonActionListener());
 			}
 		}
 	}
 	private class BtnNewButtonActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) throws HibernateException {
 			double velocidad = Double.parseDouble(textField.getText());
 			radar = new Radar (velocidad);
-			radar.iniciar_radar();
+			radar.iniciar_radar();			
 		}
 	}
 	private class TextFieldActionListener implements ActionListener {
