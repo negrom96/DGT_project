@@ -56,7 +56,7 @@ public class HibernateFactory {
     public static void close(Session session) {
         if (session != null) {
             try {
-                session.close();
+                sessionFactory.close();
             } catch (HibernateException ignored) {
                 log.error("Couldn't close Session", ignored);
             }
