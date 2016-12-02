@@ -1,24 +1,22 @@
 package radar.domain;
 
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import edu.uclm.esi.iso2.multas.dao.GeneralDao;
+import edu.uclm.esi.iso2.multas.domain.Inquiry;
 import edu.uclm.esi.iso2.multas.domain.Manager;
 import edu.uclm.esi.iso2.multas.domain.SanctionHolder;
 import edu.uclm.esi.iso2.multas.domain.Vehicle;
 
 public class Radar {
-	private boolean state;
-	private double velocidad_max;
-	
-	private List<Vehicle> coches;
-	private List<SanctionHolder> infracciones;
+	private boolean state; // Estado del radar (funcionando o apagado)
+	private double velocidad_max; // Velocidad maxima
+	private List<Vehicle> coches; // Lista de coches
+	private List<SanctionHolder> infractores; // Lista de infractores
 	
 	public Radar (double velocidad_max) {
 		this.velocidad_max = velocidad_max;
 		coches = null;
-		// TODO Auto-generated constructor stub
 	}
 	public double getVelocidad_max() {
 		return velocidad_max;
@@ -30,26 +28,28 @@ public class Radar {
 		return state;
 	}
 	public void iniciar_radar () throws HibernateException {
-		String direccion = null;
+		int infractor; // posicion aleatoria en la lista SanctionHolder
+		String direccion; // FullAddress del infractor
 		int numeroExpediente;
-		Vehicle aux;
+		Inquiry infraccion; // Objeto tipo Inquiry para crear la sancion
+		Vehicle aux; // Objeto tipo Vehicle para obtener la licencia
+		
 		state = true;
 		coches = new GeneralDao<Vehicle>().findAll(Vehicle.class);
-		infracciones = new GeneralDao<SanctionHolder>().findAll(SanctionHolder.class);
+		infractores = new GeneralDao<SanctionHolder>().findAll(SanctionHolder.class);
+		
 		do {
-			double velocidad = speed_random();
+			double velocidad = (double) (Math.random() * 199 + 0); // Velocidad generada aleatoriamente
 			if (velocidad > velocidad_max) {
-				aux = coches.get((int) Math.random() * (coches.size() - 1) + 0);
-				direccion = infracciones.get((int) Math.random() * (infracciones.size() - 1) + 0).getFullAddress();
+				aux = coches.get((int) Math.random() * (coches.size() - 1) + 0); // Coche seleccionado aleatoriamente de la lista de coches
+				infractor = (int) Math.random() * (infractores.size() - 1) + 0; // Infractor seleccionado aleatoriamente de la lista de infractores
+				direccion = infractores.get(infractor).getFullAddress();
 				System.out.println("Coche: " + aux.getLicense()+ " Localizacion: " + direccion);
 				// Apertura de Expediente
 				numeroExpediente = Manager.get().openInquiry(aux.getLicense(), velocidad, direccion, velocidad_max);
+				infraccion= new GeneralDao<Inquiry>().findById(Inquiry.class, numeroExpediente);
+				infraccion.createSanctionFor(infractores.get(infractor).getDni());
 			}
-		} while (state);
-	}
-	public double speed_random () {
-		double speed = 0.0;
-		speed = (double) (Math.random() * 199 + 0);
-		return speed;
+		} while (state); // Mientras el estado sea encendido, el radar esta capturando coches.
 	}
 }
