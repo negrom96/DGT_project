@@ -2,9 +2,12 @@ package radar.domain;
 
 import java.util.List;
 import org.hibernate.HibernateException;
+import edu.uclm.esi.iso2.multas.dao.DriverDao;
 import edu.uclm.esi.iso2.multas.dao.GeneralDao;
+import edu.uclm.esi.iso2.multas.domain.Driver;
 import edu.uclm.esi.iso2.multas.domain.Inquiry;
 import edu.uclm.esi.iso2.multas.domain.Manager;
+import edu.uclm.esi.iso2.multas.domain.Sanction;
 import edu.uclm.esi.iso2.multas.domain.SanctionHolder;
 import edu.uclm.esi.iso2.multas.domain.Vehicle;
 
@@ -33,6 +36,7 @@ public class Radar {
 		int numeroExpediente;
 		Inquiry infraccion; // Objeto tipo Inquiry para crear la sancion
 		Vehicle aux; // Objeto tipo Vehicle para obtener la licencia
+		Sanction sancion; // Objeto Sancion 
 		
 		state = true;
 		coches = new GeneralDao<Vehicle>().findAll(Vehicle.class);
@@ -40,6 +44,7 @@ public class Radar {
 		
 		do {
 			double velocidad = (double) (Math.random() * 199 + 0); // Velocidad generada aleatoriamente
+			
 			if (velocidad > velocidad_max) {
 				aux = coches.get((int) Math.random() * (coches.size() - 1) + 0); // Coche seleccionado aleatoriamente de la lista de coches
 				infractor = (int) Math.random() * (infractores.size() - 1) + 0; // Infractor seleccionado aleatoriamente de la lista de infractores
@@ -48,8 +53,26 @@ public class Radar {
 				// Apertura de Expediente
 				numeroExpediente = Manager.get().openInquiry(aux.getLicense(), velocidad, direccion, velocidad_max);
 				infraccion= new GeneralDao<Inquiry>().findById(Inquiry.class, numeroExpediente);
-				infraccion.createSanctionFor(infractores.get(infractor).getDni());
+				sancion = infraccion.createSanctionFor(infractores.get(infractor).getDni());
+				
+				pagarsancion(sancion);
+				
 			}
 		} while (state); // Mientras el estado sea encendido, el radar esta capturando coches.
+	}
+	public void pagarsancion (Sanction sancion) {
+		Driver conductor; // Objeto Driver que almacenará el conductor causante de la infraccion
+		int puntos_actuales; // Variable numerica que almacena los puntos del conductor una vez se le aplica la sancion
+		conductor = new DriverDao().findByDni(sancion.getSanctionHolder().getDni()); // Busqueda del conductor de la infraccion a partir del dni del infractor.
+		puntos_actuales = conductor.getPoints() - sancion.getPoints(); // Calculo de puntos restantes del conductor.
+		
+			if (puntos_actuales >= 0) {
+				conductor.setPoints(puntos_actuales); // Cambio de puntos
+				sancion.pay(); // Pago de sancion
+				System.out.println("Conductor: " + conductor.getDni() + "\nCantidad (€): " + sancion.getAmount() + "\nPuntos restantes: " + conductor.getPoints() + "\nFecha: " + sancion.getDateOfPayment());
+			}
+			else { // El numero de puntos es menor que 0.
+				System.out.println("Error. El conductor " + conductor.getDni() + " no tiene suficientes puntos.");
+			}
 	}
 }
