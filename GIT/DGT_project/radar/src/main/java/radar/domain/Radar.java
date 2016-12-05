@@ -4,9 +4,11 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import edu.uclm.esi.iso2.multas.dao.DriverDao;
 import edu.uclm.esi.iso2.multas.dao.GeneralDao;
+import edu.uclm.esi.iso2.multas.dao.OwnerDao;
 import edu.uclm.esi.iso2.multas.domain.Driver;
 import edu.uclm.esi.iso2.multas.domain.Inquiry;
 import edu.uclm.esi.iso2.multas.domain.Manager;
+import edu.uclm.esi.iso2.multas.domain.Owner;
 import edu.uclm.esi.iso2.multas.domain.Sanction;
 import edu.uclm.esi.iso2.multas.domain.SanctionHolder;
 import edu.uclm.esi.iso2.multas.domain.Vehicle;
@@ -29,6 +31,9 @@ public class Radar {
 	}
 	public boolean isState() {
 		return state;
+	}
+	public List<Vehicle> get_coches () {
+		return coches;
 	}
 	public void iniciar_radar () throws HibernateException {
 		int infractor; // posicion aleatoria en la lista SanctionHolder
@@ -74,5 +79,20 @@ public class Radar {
 			else { // El numero de puntos es menor que 0.
 				System.out.println("Error. El conductor " + conductor.getDni() + " no tiene suficientes puntos.");
 			}
+	}
+	public void cambiarpropietario (String Licencia, String DNI) {
+		Owner propietario;
+		Vehicle coche = null;
+		
+		propietario = new OwnerDao().findByDni(DNI);
+		
+		for (int i=0; i < coches.size(); i++) {
+			if (coches.get(i).getLicense().equals(Licencia)) {
+				coche = coches.get(i);
+				coche.setOwner(propietario);
+			}
+		}
+		if (coche == null)
+			System.out.println("Error. La Licencia " + Licencia + " no ha sido encontrada.");
 	}
 }
