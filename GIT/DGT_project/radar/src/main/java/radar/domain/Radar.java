@@ -35,6 +35,11 @@ public class Radar {
 	public List<Vehicle> get_coches () {
 		return coches;
 	}
+	
+	public void desconectar () {
+		state = false;
+	}
+	
 	public void iniciar_radar () throws HibernateException {
 		int infractor; // posicion aleatoria en la lista SanctionHolder
 		String direccion; // FullAddress del infractor

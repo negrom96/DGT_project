@@ -106,6 +106,7 @@ public class InterfazRadar {
 				}
 				{
 					buttonApagar = new JButton("Apagar Radar");
+					buttonApagar.addActionListener(new ButtonApagarActionListener());
 					buttonApagar.setEnabled(false);
 					buttonApagar.setBounds(180, 175, 164, 41);
 					panel.add(buttonApagar);
@@ -197,6 +198,11 @@ public class InterfazRadar {
 	private class ButtonCambiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			radar.cambiarpropietario(textFieldLicence.getText(), textFieldDNI.getText());
+		}
+	}
+	private class ButtonApagarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			radar.desconectar();
 		}
 	}
 }
