@@ -22,7 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/radar"/>
 	<classpathentry kind="lib" path="C:/Users/pablo/Dropbox/UNIVERSIDAD/Tercero/1er cuatrimestre/INGENIERÍA DE SOFTWARE II/ISO II/hibernate-3.0.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/radar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

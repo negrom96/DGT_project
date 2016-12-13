@@ -20,11 +20,17 @@
     	<artifactId>javax.servlet-api</artifactId>
     	<version>3.1.0</version>
     </dependency>
+    <dependency>
+    	<groupId>ISODEVELOPERSSL</groupId>
+    	<artifactId>multas</artifactId>
+    	<version>1.1</version>
+    </dependency>
   </dependencies>
   <version>1.7</version>
   <parent>
-  	<groupId>ISODEVELOPERSL</groupId>
+  	<groupId>ISODEVELOPERSSL</groupId>
   	<artifactId>DGT_project</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>1.7</version>
   </parent>
+  <groupId>ISODEVELOPERSSL</groupId>
 </project>

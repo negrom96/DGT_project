@@ -15,11 +15,21 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>ISODEVELOPERSSL</groupId>
+    	<artifactId>multas</artifactId>
+    	<version>1.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>ISODEVELOPERSSL</groupId>
+    	<artifactId>radar</artifactId>
+    	<version>1.7</version>
+    </dependency>
   </dependencies>
   <parent>
-  	<groupId>ISODEVELOPERSL</groupId>
+  	<groupId>ISODEVELOPERSSL</groupId>
   	<artifactId>DGT_project</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>1.7</version>
   </parent>
   <version>1.3</version>
   <groupId>ISODEVELOPERSSL</groupId>

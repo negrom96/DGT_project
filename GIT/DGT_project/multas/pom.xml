@@ -38,7 +38,7 @@
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>6.0.4</version>
+	    <version>5.1.39</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-jcl -->
 	<dependency>
@@ -71,8 +71,8 @@
   </build>
   <groupId>ISODEVELOPERSSL</groupId>
   <parent>
-  	<groupId>ISODEVELOPERSL</groupId>
+  	<groupId>ISODEVELOPERSSL</groupId>
   	<artifactId>DGT_project</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
+  	<version>1.7</version>
   </parent>
 </project>
